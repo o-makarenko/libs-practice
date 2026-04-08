@@ -9,15 +9,23 @@ likes = np.array([1200, 3000, 800, 4100])
 comments = np.array([150, 400, 50, 600])
 
 # TODO:
+total_interactions = likes + comments
+engagment_rate = (total_interactions / views) * 100
+print(f"The engagment rate is {np.round(engagment_rate)}")
+indices = np.argwhere(engagment_rate == 9)
 
 
 
 # Guided Practice 1
+views = np.array([15000, 32000, 8500, 45000])
 rpm = np.array([1.5, 2.0, 0.8, 2.5])
 production_cost = np.array([10, 30, 5, 50])
 
 # TODO:
-
+income = (views * rpm)/1000 - production_cost
+print("The income is", np.round(income, 2))
+print("The most profitable video:", np.argwhere(income == np.max(income)))
+print("The progit:", np.max(income))
 
 
 # Live Coding 2
@@ -29,6 +37,13 @@ cpu_load = np.array([
 
 # TODO:
 
+mean_load = np.mean(cpu_load, axis=1)
+print("Mean Load", mean_load)
+max_load = np.max(cpu_load)
+print("Absolute max", max_load)
+critical_loads = cpu_load[cpu_load > 90]
+print("Critical Loads", critical_loads)
+print("Count of accidents", critical_loads.size)
 
 
 
@@ -42,7 +57,12 @@ pings = np.array([
 ])
 
 # TODO:
-
+min_time_ping = np.min(pings, axis=1)
+print("Min Time Ping", min_time_ping)
+mean_time_ping = np.mean(pings)
+print("Mean Time Ping", mean_time_ping)
+print("Count of accidents", pings.size[pings > 200])
+print(pings[pings > 200] / pings.size*100)
 
 
 
@@ -54,3 +74,5 @@ df = pd.read_csv("datasets/Global_Mental_Health_Crisis_Index_2026.csv")
 print(df.head())
 
 # TODO:
+df["risk_category"] = np.where(df["treatment_gap_pct"] > 60, "High risk", "Standard")
+print(df)
